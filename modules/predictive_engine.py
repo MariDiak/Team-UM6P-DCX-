@@ -32,7 +32,7 @@ try:
     CATBOOST_AVAILABLE = True
 except ImportError:
     CATBOOST_AVAILABLE = False
-    st.warning("⚠️ CatBoost n'est pas installé. Installation recommandée: pip install catboost")
+    st.warning(" CatBoost n'est pas installé. Installation recommandée: pip install catboost")
 
 try:
     from xgboost import XGBClassifier
@@ -40,7 +40,7 @@ try:
     XGBOOST_AVAILABLE = True
 except ImportError:
     XGBOOST_AVAILABLE = False
-    st.warning("⚠️ XGBoost n'est pas installé. Installation recommandée: pip install xgboost")
+    st.warning(" XGBoost n'est pas installé. Installation recommandée: pip install xgboost")
 
 
 class PredictiveEngine:
@@ -81,18 +81,18 @@ class PredictiveEngine:
         if unique_values == 2:
             # Problème de classification binaire
             self.target_binary = True
-            st.success("✅ Classification binaire détectée")
+            st.success(" Classification binaire détectée")
 
         elif unique_values > 2 and unique_values <= 10:
             # Problème de classification multi-classes (max 10 classes)
             self.target_binary = False
             if value_counts.min() < 5:
-                st.warning(f"⚠️ Certaines classes ont très peu d'échantillons (min: {value_counts.min()})")
+                st.warning(f" Certaines classes ont très peu d'échantillons (min: {value_counts.min()})")
             st.info(f"Classification multi-classes ({unique_values} classes)")
 
         else:
             # Trop de classes - créer une variable binaire à partir de la distribution
-            st.warning(f"⚠️ Trop de classes ({unique_values}). Création d'une variable cible binaire...")
+            st.warning(f" Trop de classes ({unique_values}). Création d'une variable cible binaire...")
 
             # Option 1: Si la colonne contient des codes risque
             if any(keyword in target_col.lower() for keyword in ['risque', 'risk', 'niveau', 'classe', 'grade']):
@@ -122,7 +122,7 @@ class PredictiveEngine:
             y = y_binary
             df_processed[target_col] = y
             self.target_binary = True
-            st.success(f"✅ Variable cible binaire créée. Distribution: {y.value_counts().to_dict()}")
+            st.success(f" Variable cible binaire créée. Distribution: {y.value_counts().to_dict()}")
 
         # Identifier les features catégorielles pour CatBoost
         categorical_cols = df_processed.select_dtypes(include=['object', 'category']).columns.tolist()
@@ -155,7 +155,7 @@ class PredictiveEngine:
                 )
             else:
                 # Pas assez d'échantillons pour stratification
-                st.warning("⚠️ Pas assez d'échantillons pour la stratification")
+                st.warning(" Pas assez d'échantillons pour la stratification")
                 X_train, X_test, y_train, y_test = train_test_split(
                     X, y, test_size=test_size, random_state=random_state
                 )
@@ -222,7 +222,7 @@ class PredictiveEngine:
             st.info(f"CatBoost utilisera {len(cat_features_indices)} features catégorielles")
 
         if n_samples < 50:
-            st.warning("⚠️ Très peu d'échantillons. Utilisation de RandomForest par défaut.")
+            st.warning(" Très peu d'échantillons. Utilisation de RandomForest par défaut.")
             model_type = 'random_forest'
 
         if model_type == 'random_forest':
@@ -254,7 +254,7 @@ class PredictiveEngine:
 
         elif model_type == 'catboost':
             if not CATBOOST_AVAILABLE:
-                st.error("❌ CatBoost n'est pas installé. Veuillez installer avec: pip install catboost")
+                st.error(" CatBoost n'est pas installé. Veuillez installer avec: pip install catboost")
                 st.info("Utilisation de RandomForest à la place.")
                 return self.train_model(X_train, y_train, 'random_forest', optimize)
 
@@ -285,7 +285,7 @@ class PredictiveEngine:
 
         elif model_type == 'xgboost':
             if not XGBOOST_AVAILABLE:
-                st.error("❌ XGBoost n'est pas installé. Veuillez installer avec: pip install xgboost")
+                st.error(" XGBoost n'est pas installé. Veuillez installer avec: pip install xgboost")
                 st.info("Utilisation de RandomForest à la place.")
                 return self.train_model(X_train, y_train, 'random_forest', optimize)
 
@@ -346,11 +346,11 @@ class PredictiveEngine:
 
                 self.model = grid_search.best_estimator_
 
-                st.success(f"✅ Meilleurs paramètres: {grid_search.best_params_}")
-                st.success(f"✅ Meilleur score CV: {grid_search.best_score_:.3f}")
+                st.success(f" Meilleurs paramètres: {grid_search.best_params_}")
+                st.success(f" Meilleur score CV: {grid_search.best_score_:.3f}")
 
             except Exception as e:
-                st.warning(f"⚠️ Échec de l'optimisation: {e}. Utilisation du modèle par défaut.")
+                st.warning(f" Échec de l'optimisation: {e}. Utilisation du modèle par défaut.")
                 self.model = base_model
                 with st.spinner(f"Entraînement du modèle {model_type}..."):
                     self.model.fit(X_train, y_train)
@@ -366,7 +366,7 @@ class PredictiveEngine:
                 'importance': self.model.feature_importances_
             }).sort_values('importance', ascending=False)
 
-            st.info("📊 Importance des features calculée")
+            st.info(" Importance des features calculée")
 
         # Calcul des métriques sur l'ensemble d'entraînement
         self._compute_train_metrics(X_train, y_train)
@@ -375,7 +375,7 @@ class PredictiveEngine:
         if self.target_binary and hasattr(self.model, 'predict_proba'):
             self._optimize_threshold(X_train, y_train)
 
-        st.success(f"✅ Modèle {model_type} entraîné avec succès!")
+        st.success(f" Modèle {model_type} entraîné avec succès!")
 
     def _compute_train_metrics(self, X_train, y_train):
         """Calcule les métriques sur l'ensemble d'entraînement"""
@@ -434,12 +434,12 @@ class PredictiveEngine:
                     }
 
             self.threshold_optimized = best_threshold
-            st.info(f"🔧 Seuil optimal pour classification: {best_threshold:.2f}")
+            st.info(f" Seuil optimal pour classification: {best_threshold:.2f}")
             st.info(f"   F1-score: {best_metrics['f1']:.3f}, Précision: {best_metrics['precision']:.3f}, "
                     f"Recall: {best_metrics['recall']:.3f}, MCC: {best_metrics['mcc']:.3f}")
 
         except Exception as e:
-            st.warning(f"⚠️ Impossible d'optimiser le seuil: {e}")
+            st.warning(f" Impossible d'optimiser le seuil: {e}")
             self.threshold_optimized = 0.5
 
     def predict(self, X, use_optimized_threshold=True):
@@ -841,7 +841,7 @@ class PredictiveEngine:
             raise ValueError("Le modèle n'a pas été entraîné.")
 
         if not self.target_binary:
-            st.warning("⚠️ La prédiction de risque est optimisée pour la classification binaire.")
+            st.warning(" La prédiction de risque est optimisée pour la classification binaire.")
             return None
 
         # Préparer les données
@@ -942,7 +942,7 @@ class PredictiveEngine:
         }
 
         joblib.dump(model_data, path)
-        st.success(f"✅ Modèle sauvegardé: {path}")
+        st.success(f" Modèle sauvegardé: {path}")
 
     def load_model(self, path='models/risk_model.pkl'):
         """Charge un modèle sauvegardé"""
@@ -960,7 +960,7 @@ class PredictiveEngine:
         self.train_metrics = model_data.get('train_metrics')
         self.test_metrics = model_data.get('test_metrics')
 
-        st.success(f"✅ Modèle chargé: {path}")
+        st.success(f" Modèle chargé: {path}")
 
     def get_model_info(self):
         """Retourne des informations sur le modèle"""
@@ -976,5 +976,6 @@ class PredictiveEngine:
             'train_metrics_available': self.train_metrics is not None,
             'test_metrics_available': self.test_metrics is not None
         }
+
 
         return info
