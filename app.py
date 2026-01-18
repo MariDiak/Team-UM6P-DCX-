@@ -41,7 +41,7 @@ except ImportError:
 # ------------------------------------------------------------
 st.set_page_config(
     page_title="LIK Insurance Analyst",
-    page_icon="🔒",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -125,7 +125,7 @@ with st.sidebar:
     if os.path.exists(logo_path):
         st.image(logo_path, width=180)
     else:
-        st.markdown("### 🔒 LIK Insurance")
+        st.markdown("###  LIK Insurance")
 
     # Configuration API
     st.markdown("### 🔐 Configuration API")
@@ -143,7 +143,7 @@ with st.sidebar:
             from llm_client import OpenAIAnalyzer
 
             st.session_state.openai_client = OpenAIAnalyzer(api_key=api_key_input)
-            st.success("✅ Clé API validée")
+            st.success("  Clé API validée")
         except ImportError:
             st.warning("Clé API validée invalide")
         except Exception as e:
@@ -152,39 +152,39 @@ with st.sidebar:
     st.markdown("---")
 
     # Navigation
-    st.markdown("### 🧭 Navigation")
+    st.markdown("###  Navigation")
 
     page = st.radio(
         "",
         [
-            "📤 Chargement des données",
-            "🔧 Traitement des données",
-            "🔍 Métadonnées",
-            "🤖 Assistant IA",
-            "📈 Modèles Prédictifs",
-            "🔍 Insights Avancés",
-            "📝 Rapport"
+            " Chargement des données",
+            " Traitement des données",
+            " Métadonnées",
+            " Assistant IA",
+            " Modèles Prédictifs",
+            " Insights Avancés",
+            " Rapport"
         ]
     )
 
     st.markdown("---")
 
     # État de l'application
-    st.markdown("### 📊 État")
+    st.markdown("###  État")
 
     if st.session_state.data_loaded:
         df = st.session_state.dataframe
-        st.success("✅ Données chargées")
+        st.success("  Données chargées")
         st.caption(f"• {len(df):,} lignes")
         st.caption(f"• {len(df.columns)} colonnes")
     else:
-        st.warning("⚠️ Aucune donnée")
+        st.warning(" Aucune donnée")
 
     if st.session_state.metadata is not None:
-        st.success("✅ Métadonnées prêtes")
+        st.success("  Métadonnées prêtes")
 
     if st.session_state.scored_clients is not None:
-        st.success("✅ Analyse risque complète")
+        st.success("  Analyse risque complète")
 
 # ------------------------------------------------------------
 # Initialisation des moteurs IA dépendants de OpenAI
@@ -199,10 +199,10 @@ if st.session_state.openai_client is not None:
             pass
 
 # ============================================================
-# 1️⃣ CHARGEMENT DES DONNÉES
+#  CHARGEMENT DES DONNÉES
 # ============================================================
-if page == "📤 Chargement des données":
-    st.header("📤 Chargement des données")
+if page == " Chargement des données":
+    st.header(" Chargement des données")
 
     col1, col2 = st.columns([2, 1])
 
@@ -248,9 +248,9 @@ if page == "📤 Chargement des données":
                         st.session_state.df_final = df
 
                     # Affichage des informations de base
-                    st.success(f"✅ Fichier chargé: {uploaded_file.name}")
+                    st.success(f"  Fichier chargé: {uploaded_file.name}")
 
-                    with st.expander("📋 Aperçu des données", expanded=True):
+                    with st.expander(" Aperçu des données", expanded=True):
                         st.dataframe(df.head(10), use_container_width=True)
 
                     # Statistiques rapides
@@ -276,13 +276,13 @@ if page == "📤 Chargement des données":
                     st.session_state.scored_clients = None
                     st.session_state.client_table = None
 
-                    st.success("✅ Données prêtes pour l'analyse!")
+                    st.success("  Données prêtes pour l'analyse!")
 
             except Exception as e:
-                st.error(f"❌ Erreur lors du chargement: {str(e)}")
+                st.error(f" Erreur lors du chargement: {str(e)}")
 
     with col2:
-        st.markdown("** ℹ️ Sécurité 100%")
+        st.markdown("**  Sécurité 100%")
         st.info("""
         **Sachez que :**
         cette application vous permet de capitaliser sur vos objectifs pour le profilage et la gestion des clients en risque.
@@ -294,13 +294,13 @@ if page == "📤 Chargement des données":
         """)
 
 # ============================================================
-# 🔧 TRAITEMENT DES DONNÉES
+#  TRAITEMENT DES DONNÉES
 # ============================================================
-elif page == "🔧 Traitement des données":
-    st.header("🔧 Traitement Avancé des Données")
+elif page == " Traitement des données":
+    st.header(" Traitement Avancé des Données")
 
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Veuillez d'abord charger des données")
+        st.warning(" Veuillez d'abord charger des données")
         st.stop()
 
     df = st.session_state.dataframe.copy()
@@ -310,37 +310,37 @@ elif page == "🔧 Traitement des données":
         from data_processing_engine import DataProcessingEngine
 
         processor = DataProcessingEngine()
-        st.success("✅ Moteur de traitement chargé")
+        st.success("  Moteur de traitement chargé")
     except ImportError:
-        st.error("❌ Module data_processing_engine non disponible")
+        st.error(" Module data_processing_engine non disponible")
         st.info("Assurez-vous que le module est dans le dossier 'modules/'")
         st.stop()
 
     # Layout en onglets
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "🏗️ Nettoyage",
-        "⚙️ Enrichissement",
-        "🎯 Segmentation",
-        "📊 Qualité",
-        "🚀 Pipeline"
+        " Nettoyage",
+        " Enrichissement",
+        " Segmentation",
+        " Qualité",
+        " Pipeline"
     ])
 
     with tab1:
-        st.subheader("🏗️ Nettoyage Complet des Données")
+        st.subheader(" Nettoyage Complet des Données")
 
         col1, col2 = st.columns([2, 1])
 
         with col1:
             st.markdown("""
             **Fonctionnalités de nettoyage:**
-            - ✅ Standardisation des noms de colonnes
-            - ✅ Traitement intelligent des valeurs manquantes
-            - ✅ Détection et correction des outliers
-            - ✅ Correction des types de données
-            - ✅ Validation des contraintes métier
+            -   Standardisation des noms de colonnes
+            -   Traitement intelligent des valeurs manquantes
+            -   Détection et correction des outliers
+            -   Correction des types de données
+            -   Validation des contraintes métier
             """)
 
-            if st.button("🔧 Exécuter le nettoyage complet", type="primary"):
+            if st.button(" Exécuter le nettoyage complet", type="primary"):
                 with st.spinner("Nettoyage en cours..."):
                     try:
                         df_clean = processor.comprehensive_clean(df)
@@ -348,7 +348,7 @@ elif page == "🔧 Traitement des données":
                         st.session_state.processor = processor
 
                         # Afficher les résultats
-                        st.success(f"✅ Nettoyage terminé: {df.shape[0]} → {df_clean.shape[0]} lignes")
+                        st.success(f"  Nettoyage terminé: {df.shape[0]} → {df_clean.shape[0]} lignes")
 
                         # Métriques
                         summary = processor.get_processing_summary()
@@ -363,7 +363,7 @@ elif page == "🔧 Traitement des données":
                                       f"{summary['quality_metrics'].get('consistency_score', 0):.1f}%")
 
                     except Exception as e:
-                        st.error(f"❌ Erreur lors du nettoyage: {str(e)}")
+                        st.error(f" Erreur lors du nettoyage: {str(e)}")
 
         with col2:
             st.info("""
@@ -378,20 +378,20 @@ elif page == "🔧 Traitement des données":
             """)
 
     with tab2:
-        st.subheader("⚙️ Enrichissement des Données")
+        st.subheader(" Enrichissement des Données")
 
         if 'df_processed' not in st.session_state:
-            st.info("ℹ️ Veuillez d'abord nettoyer les données")
+            st.info(" Veuillez d'abord nettoyer les données")
         else:
             df_clean = st.session_state.df_processed
 
             st.markdown("""
             **Features d'assurance à créer:**
-            - 📊 **Démographiques:** Catégories d'âge, expérience de conduite
-            - 🚗 **Véhicule:** Catégories de risque par marque
-            - ⚠️ **Risque:** Scores composites et normalisés
-            - 📅 **Temporelles:** Saisons, trimestres, jours de semaine
-            - 🎯 **Composites:** Ratios métier avancés
+            -  **Démographiques:** Catégories d'âge, expérience de conduite
+            -  **Véhicule:** Catégories de risque par marque
+            -  **Risque:** Scores composites et normalisés
+            -  **Temporelles:** Saisons, trimestres, jours de semaine
+            -  **Composites:** Ratios métier avancés
             """)
 
             col_feat1, col_feat2 = st.columns(2)
@@ -405,7 +405,7 @@ elif page == "🔧 Traitement des données":
                 create_temporal = st.checkbox("Features temporelles", value=True)
                 create_composite = st.checkbox("Features composites", value=True)
 
-            if st.button("⚡ Générer les features", type="primary"):
+            if st.button(" Générer les features", type="primary"):
                 with st.spinner("Enrichissement en cours..."):
                     try:
                         # Appliquer l'enrichissement
@@ -418,17 +418,17 @@ elif page == "🔧 Traitement des données":
 
                         # Afficher les nouvelles features
                         new_features = processor.metadata.get('engineered_features', [])
-                        st.success(f"✅ {len(new_features)} nouvelles features créées")
+                        st.success(f"  {len(new_features)} nouvelles features créées")
 
                         # Aperçu des nouvelles colonnes
-                        with st.expander("📋 Voir les nouvelles features"):
+                        with st.expander(" Voir les nouvelles features"):
                             for i, feat in enumerate(new_features[:10]):
                                 st.markdown(f"- **{feat}**")
                                 if i >= 9 and len(new_features) > 10:
                                     st.markdown(f"... et {len(new_features) - 10} autres")
 
                         # Statistiques
-                        st.markdown("#### 📈 Statistiques des nouvelles features")
+                        st.markdown("####  Statistiques des nouvelles features")
 
                         # Afficher quelques statistiques pour les nouvelles features numériques
                         numeric_new = [f for f in new_features if df_enriched[f].dtype in ['int64', 'float64']]
@@ -437,13 +437,13 @@ elif page == "🔧 Traitement des données":
                             st.dataframe(stats_df.style.format("{:.2f}"), use_container_width=True)
 
                     except Exception as e:
-                        st.error(f"❌ Erreur lors de l'enrichissement: {str(e)}")
+                        st.error(f" Erreur lors de l'enrichissement: {str(e)}")
 
     with tab3:
-        st.subheader("🎯 Segmentation Client")
+        st.subheader(" Segmentation Client")
 
         if 'df_enriched' not in st.session_state:
-            st.info("ℹ️ Veuillez d'abord enrichir les données")
+            st.info(" Veuillez d'abord enrichir les données")
         else:
             df_enriched = st.session_state.df_enriched
 
@@ -469,7 +469,7 @@ elif page == "🔧 Traitement des données":
                 "Complet": "comprehensive"
             }
 
-            if st.button("🎯 Segmenter les clients", type="primary"):
+            if st.button(" Segmenter les clients", type="primary"):
                 with st.spinner("Segmentation en cours..."):
                     try:
                         processor = st.session_state.processor
@@ -484,13 +484,13 @@ elif page == "🔧 Traitement des données":
                         if 'segment_cluster' in df_segmented.columns:
                             segment_counts = df_segmented['segment_cluster'].value_counts()
 
-                            st.success(f"✅ {len(segment_counts)} segments identifiés")
+                            st.success(f"  {len(segment_counts)} segments identifiés")
 
                             # Visualisation
                             col_seg1, col_seg2 = st.columns(2)
 
                             with col_seg1:
-                                st.markdown("#### 📊 Distribution des segments")
+                                st.markdown("####  Distribution des segments")
                                 st.dataframe(
                                     segment_counts.reset_index().rename(
                                         columns={'segment_cluster': 'Segment', 'count': 'Nombre'}
@@ -510,10 +510,10 @@ elif page == "🔧 Traitement des données":
                                 st.plotly_chart(fig, use_container_width=True)
 
                     except Exception as e:
-                        st.error(f"❌ Erreur lors de la segmentation: {str(e)}")
+                        st.error(f" Erreur lors de la segmentation: {str(e)}")
 
     with tab4:
-        st.subheader("📊 Analyse de Qualité")
+        st.subheader(" Analyse de Qualité")
 
         # Sélection du dataset à analyser
         dataset_options = ["Données brutes", "Données nettoyées", "Données enrichies"]
@@ -536,7 +536,7 @@ elif page == "🔧 Traitement des données":
             if dataset_key in st.session_state:
                 df_to_analyze = st.session_state[dataset_key]
 
-                if st.button("🔍 Analyser la qualité", type="primary"):
+                if st.button(" Analyser la qualité", type="primary"):
                     with st.spinner("Analyse en cours..."):
                         try:
                             # Analyse de qualité
@@ -544,7 +544,7 @@ elif page == "🔧 Traitement des données":
                             quality_report = processor.analyze_data_quality(df_to_analyze)
 
                             # Affichage des résultats
-                            st.success("✅ Analyse de qualité terminée")
+                            st.success("  Analyse de qualité terminée")
 
                             # Score global
                             col_q1, col_q2, col_q3 = st.columns(3)
@@ -561,14 +561,14 @@ elif page == "🔧 Traitement des données":
                                 st.metric("Lignes", f"{quality_report['basic_stats']['rows']:,}")
 
                             # Détails par métrique
-                            st.markdown("#### 📈 Métriques détaillées")
+                            st.markdown("####  Métriques détaillées")
 
                             metrics_cols = st.columns(2)
 
                             with metrics_cols[0]:
                                 # Complétude
                                 completeness = quality_report['completeness']
-                                st.markdown(f"**📊 Complétude:** {completeness['score']:.1f}/100")
+                                st.markdown(f"** Complétude:** {completeness['score']:.1f}/100")
                                 st.progress(completeness['score'] / 100)
 
                                 if completeness['columns_with_missing']:
@@ -578,14 +578,14 @@ elif page == "🔧 Traitement des données":
                             with metrics_cols[1]:
                                 # Cohérence
                                 consistency = quality_report['consistency']
-                                st.markdown(f"**🔧 Cohérence:** {consistency['score']:.1f}/100")
+                                st.markdown(f"** Cohérence:** {consistency['score']:.1f}/100")
                                 st.progress(consistency['score'] / 100)
 
                                 if consistency['issues_found'] > 0:
                                     st.warning(f"Problèmes de cohérence: {consistency['issues_found']}")
 
                             # Types de données
-                            st.markdown("#### 🏷️ Types de données")
+                            st.markdown("####  Types de données")
 
                             types_cols = st.columns(3)
                             basic_stats = quality_report['basic_stats']
@@ -607,11 +607,11 @@ elif page == "🔧 Traitement des données":
 
                             # Export du rapport
                             st.markdown("---")
-                            st.markdown("#### 📤 Export du rapport")
+                            st.markdown("####  Export du rapport")
 
                             report_format = st.radio("Format:", ["HTML", "Texte"])
 
-                            if st.button("📄 Générer le rapport complet"):
+                            if st.button(" Générer le rapport complet"):
                                 report = processor.export_quality_report(
                                     df_to_analyze,
                                     format='html' if report_format == 'HTML' else 'text'
@@ -619,40 +619,40 @@ elif page == "🔧 Traitement des données":
 
                                 if report_format == 'HTML':
                                     st.download_button(
-                                        label="⬇️ Télécharger HTML",
+                                        label=" Télécharger HTML",
                                         data=report,
                                         file_name="rapport_qualite.html",
                                         mime="text/html"
                                     )
                                 else:
                                     st.download_button(
-                                        label="⬇️ Télécharger Texte",
+                                        label=" Télécharger Texte",
                                         data=report,
                                         file_name="rapport_qualite.txt",
                                         mime="text/plain"
                                     )
 
                         except Exception as e:
-                            st.error(f"❌ Erreur lors de l'analyse: {str(e)}")
+                            st.error(f" Erreur lors de l'analyse: {str(e)}")
             else:
-                st.info(f"ℹ️ {dataset_desc} non disponible")
+                st.info(f" {dataset_desc} non disponible")
         else:
-            st.info("ℹ️ Sélectionnez un dataset à analyser")
+            st.info(" Sélectionnez un dataset à analyser")
 
     with tab5:
-        st.subheader("🚀 Pipeline Automatisé")
+        st.subheader(" Pipeline Automatisé")
 
         st.markdown("""
         **Exécutez le pipeline complet de traitement:**
 
-        1. 🏗️ **Nettoyage** - Préparation des données
-        2. ⚙️ **Enrichissement** - Création des features
-        3. 🎯 **Segmentation** - Groupement des clients
-        4. 📊 **Qualité** - Validation des résultats
+        1.  **Nettoyage** - Préparation des données
+        2.  **Enrichissement** - Création des features
+        3.  **Segmentation** - Groupement des clients
+        4.  **Qualité** - Validation des résultats
         """)
 
         # Options du pipeline
-        st.markdown("#### ⚙️ Configuration du pipeline")
+        st.markdown("####  Configuration du pipeline")
 
         col_pipe1, col_pipe2 = st.columns(2)
 
@@ -671,7 +671,7 @@ elif page == "🔧 Traitement des données":
         run_quality_check = st.checkbox("Vérifier la qualité finale", value=True)
 
         # Bouton d'exécution
-        if st.button("🚀 Exécuter le pipeline complet", type="primary"):
+        if st.button(" Exécuter le pipeline complet", type="primary"):
             progress_bar = st.progress(0)
             status_text = st.empty()
 
@@ -681,26 +681,26 @@ elif page == "🔧 Traitement des données":
             try:
                 # Étape 1: Nettoyage
                 if run_cleaning:
-                    status_text.text("🏗️ Nettoyage des données...")
+                    status_text.text(" Nettoyage des données...")
                     df_current = processor.comprehensive_clean(df_current)
                     progress_bar.progress(25)
 
                 # Étape 2: Enrichissement
                 if run_enrichment:
-                    status_text.text("⚙️ Enrichissement des données...")
+                    status_text.text(" Enrichissement des données...")
                     df_current = processor.engineer_insurance_features(df_current)
                     progress_bar.progress(50)
 
                 # Étape 3: Segmentation
                 if run_segmentation:
-                    status_text.text("🎯 Segmentation des clients...")
+                    status_text.text(" Segmentation des clients...")
                     method_map = {"RFM + Risque": "rfm_risk", "Rentabilité": "profitability"}
                     df_current = processor.segment_clients(df_current, method=method_map[segmentation_method])
                     progress_bar.progress(75)
 
                 # Étape 4: Qualité
                 if run_quality_check:
-                    status_text.text("📊 Analyse de qualité...")
+                    status_text.text(" Analyse de qualité...")
                     quality_report = processor.analyze_data_quality(df_current)
                     progress_bar.progress(100)
 
@@ -709,7 +709,7 @@ elif page == "🔧 Traitement des données":
                 st.session_state.processor_pipeline = processor
 
                 # Affichage des résultats
-                st.success("✅ Pipeline exécuté avec succès!")
+                st.success("  Pipeline exécuté avec succès!")
 
                 # Résumé
                 col_res1, col_res2, col_res3 = st.columns(3)
@@ -728,18 +728,18 @@ elif page == "🔧 Traitement des données":
 
                 # Export des données traitées
                 st.markdown("---")
-                st.markdown("#### 📤 Export des données traitées")
+                st.markdown("####  Export des données traitées")
 
                 csv = df_current.to_csv(index=False, encoding='utf-8-sig')
                 st.download_button(
-                    label="⬇️ Télécharger CSV",
+                    label=" Télécharger CSV",
                     data=csv,
                     file_name="donnees_traitees.csv",
                     mime="text/csv"
                 )
 
                 # Résumé du pipeline
-                with st.expander("📋 Voir le résumé du pipeline"):
+                with st.expander(" Voir le résumé du pipeline"):
                     summary = processor.get_processing_summary()
 
                     st.markdown(f"**Nombre d'étapes:** {summary['total_steps']}")
@@ -751,17 +751,17 @@ elif page == "🔧 Traitement des données":
                             st.markdown(f"- {feat}")
 
             except Exception as e:
-                st.error(f"❌ Erreur lors de l'exécution du pipeline: {str(e)}")
+                st.error(f" Erreur lors de l'exécution du pipeline: {str(e)}")
                 progress_bar.empty()
                 status_text.empty()
 # ============================================================
-# 2️⃣ MÉTADONNÉES
+#  MÉTADONNÉES
 # ============================================================
-elif page == "🔍 Métadonnées":
-    st.header("🔍 Extraction des Métadonnées")
+elif page == " Métadonnées":
+    st.header(" Extraction des Métadonnées")
 
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Veuillez d'abord charger des données")
+        st.warning(" Veuillez d'abord charger des données")
         st.stop()
 
     df = st.session_state.dataframe
@@ -785,10 +785,10 @@ elif page == "🔍 Métadonnées":
             st.session_state.metadata = metadata
             st.session_state.business_context = business_context
 
-        st.success("✅ Métadonnées extraites avec succès!")
+        st.success("  Métadonnées extraites avec succès!")
 
         # Affichage des métadonnées
-        tab1, tab2, tab3 = st.tabs(["📋 Vue d'ensemble", "📊 Structure", "🎯 Contexte Métier"])
+        tab1, tab2, tab3 = st.tabs([" Vue d'ensemble", " Structure", " Contexte Métier"])
 
         with tab1:
             st.subheader("Informations Générales")
@@ -855,7 +855,7 @@ elif page == "🔍 Métadonnées":
 
         # Export des métadonnées
         st.markdown("---")
-        st.subheader("📤 Export des Métadonnées")
+        st.subheader(" Export des Métadonnées")
 
         col_exp1, col_exp2 = st.columns(2)
 
@@ -863,7 +863,7 @@ elif page == "🔍 Métadonnées":
             # Export JSON
             json_str = json.dumps(schema_json, indent=2, ensure_ascii=False)
             st.download_button(
-                label="📥 Télécharger JSON",
+                label=" Télécharger JSON",
                 data=json_str,
                 file_name="metadata.json",
                 mime="application/json"
@@ -873,28 +873,28 @@ elif page == "🔍 Métadonnées":
             # Export du contexte
             context_str = json.dumps(context, indent=2, ensure_ascii=False)
             st.download_button(
-                label="📥 Contexte Métier",
+                label=" Contexte Métier",
                 data=context_str,
                 file_name="business_context.json",
                 mime="application/json"
             )
 
     except ImportError as e:
-        st.error(f"❌ Erreur d'importation: {e}")
+        st.error(f" Erreur d'importation: {e}")
         st.info("Vérifiez que les modules sécurisés sont installés dans le dossier 'modules/'")
 
 # ============================================================
-# 5️⃣ ASSISTANT IA
+#  ASSISTANT IA
 # ============================================================
-elif page == "🤖 Assistant IA":
-    st.header("🤖 Assistant IA")
+elif page == " Assistant IA":
+    st.header(" Assistant IA")
 
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Veuillez d'abord charger des données")
+        st.warning(" Veuillez d'abord charger des données")
         st.stop()
 
     if st.session_state.openai_client is None:
-        st.warning("⚠️ Veuillez configurer votre clé API OpenAI dans la barre latérale")
+        st.warning(" Veuillez configurer votre clé API OpenAI dans la barre latérale")
         st.stop()
 
     df = st.session_state.dataframe
@@ -902,35 +902,35 @@ elif page == "🤖 Assistant IA":
 
     # Interface de requête
     user_query = st.text_area(
-        "💬 Posez votre question d'analyse:",
+        " Posez votre question d'analyse:",
         height=100,
         placeholder="Ex: Quels sont les clients les plus à risque? Quelles sont les corrélations entre les variables? Génère un graphique montrant la distribution..."
     )
 
-    if st.button("🔍 Analyser avec l'IA", type="primary") and user_query:
-        with st.spinner("🤖 L'IA analyse votre question..."):
+    if st.button(" Analyser avec l'IA", type="primary") and user_query:
+        with st.spinner(" L'IA analyse votre question..."):
             try:
                 # Analyse avec l'IA
                 result = client.analyze_query(user_query, df)
 
                 # Afficher les résultats
-                st.success("✅ Analyse terminée!")
+                st.success("  Analyse terminée!")
 
                 # Onglets pour différents aspects
-                tabs = st.tabs(["📋 Résumé", "🔍 Détails", "📊 Graphiques"])
+                tabs = st.tabs([" Résumé", " Détails", " Graphiques"])
 
                 with tabs[0]:
-                    st.markdown("### 🎯 Compréhension")
+                    st.markdown("###  Compréhension")
                     st.info(result.get("comprehension", "Analyse effectuée"))
 
-                    st.markdown("### 📝 Réponse détaillée")
+                    st.markdown("###  Réponse détaillée")
                     st.markdown(result.get("reponse_detaillee", "Pas de réponse détaillée"))
 
                 with tabs[1]:
-                    st.markdown("### 🧠 Méthodologie")
+                    st.markdown("###  Méthodologie")
                     st.markdown(result.get("methodologie", "Non spécifiée"))
 
-                    st.markdown("### 💡 Insights")
+                    st.markdown("###  Insights")
                     insights = result.get("insights", [])
                     if isinstance(insights, list):
                         for insight in insights:
@@ -938,7 +938,7 @@ elif page == "🤖 Assistant IA":
                     else:
                         st.markdown(str(insights))
 
-                    st.markdown("### 🎯 Recommandations")
+                    st.markdown("###  Recommandations")
                     recommendations = result.get("recommandations", [])
                     if isinstance(recommendations, list):
                         for rec in recommendations:
@@ -947,7 +947,7 @@ elif page == "🤖 Assistant IA":
                         st.markdown(str(recommendations))
 
                 with tabs[2]:
-                    st.markdown("### 🎨 Visualisations suggérées")
+                    st.markdown("###  Visualisations suggérées")
                     visualizations = result.get("visualisations", [])
 
                     if isinstance(visualizations, list) and visualizations:
@@ -994,7 +994,7 @@ elif page == "🤖 Assistant IA":
                             suggestions = viz_gen.auto_suggest_visualizations()
 
                             if suggestions:
-                                st.markdown("### 📊 Visualisations automatiques suggérées")
+                                st.markdown("###  Visualisations automatiques suggérées")
                                 for suggestion in suggestions[:2]:
                                     try:
                                         func = getattr(viz_gen, suggestion["function"])
@@ -1006,16 +1006,16 @@ elif page == "🤖 Assistant IA":
                             st.info("Module de visualisation non disponible")
 
             except Exception as e:
-                st.error(f"❌ Erreur lors de l'analyse: {str(e)}")
+                st.error(f" Erreur lors de l'analyse: {str(e)}")
 
 # ============================================================
-# 6️⃣ MODÈLES PRÉDICTIFS
+#  MODÈLES PRÉDICTIFS
 # ============================================================
-elif page == "📈 Modèles Prédictifs":
-    st.header("🧠 Modèles Prédictifs")
+elif page == " Modèles Prédictifs":
+    st.header(" Modèles Prédictifs")
 
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Chargez d'abord les données")
+        st.warning(" Chargez d'abord les données")
         st.stop()
 
     try:
@@ -1028,7 +1028,7 @@ elif page == "📈 Modèles Prédictifs":
 
         predictive_engine = st.session_state.predictive_engine
 
-        st.subheader("⚙️ Configuration du modèle")
+        st.subheader(" Configuration du modèle")
 
         # Détection automatique de la variable cible
         possible_targets = []
@@ -1083,7 +1083,7 @@ elif page == "📈 Modèles Prédictifs":
             ) / 100
 
         # Options avancées
-        with st.expander("⚙️ Paramètres avancées"):
+        with st.expander(" Paramètres avancées"):
             col_adv1, col_adv2 = st.columns(2)
 
             with col_adv1:
@@ -1099,7 +1099,7 @@ elif page == "📈 Modèles Prédictifs":
                 )
                 random_state = st.number_input("Random State", value=42, min_value=0, max_value=100)
 
-        if st.button("🚀 Entraîner le modèle", type="primary"):
+        if st.button(" Entraîner le modèle", type="primary"):
             with st.spinner("Préparation des données..."):
                 X_train, X_test, y_train, y_test = predictive_engine.prepare_training_data(
                     df, target_col, test_size=test_size, random_state=random_state
@@ -1110,10 +1110,10 @@ elif page == "📈 Modèles Prédictifs":
                 predictions, probabilities = predictive_engine.predict(X_test)
                 metrics = predictive_engine.evaluate(X_test, y_test)
 
-            st.success("✅ Modèle entraîné avec succès!")
+            st.success("  Modèle entraîné avec succès!")
 
             # Affichage des métriques
-            st.subheader("📊 Métriques principales")
+            st.subheader(" Métriques principales")
 
             col1, col2, col3, col4 = st.columns(4)
             with col1:
@@ -1126,7 +1126,7 @@ elif page == "📈 Modèles Prédictifs":
                 st.metric("F1-Score", f"{metrics.get('f1_score', 0):.3f}")
 
             # Matrice de confusion
-            st.subheader("🎯 Matrice de confusion")
+            st.subheader(" Matrice de confusion")
             if 'confusion_matrix' in metrics:
                 cm = metrics['confusion_matrix']
                 fig_cm = go.Figure(data=go.Heatmap(
@@ -1144,7 +1144,7 @@ elif page == "📈 Modèles Prédictifs":
                 st.plotly_chart(fig_cm, use_container_width=True)
 
             # Importance des features
-            st.subheader("📈 Importance des features")
+            st.subheader(" Importance des features")
             try:
                 importance_fig = predictive_engine.get_feature_importance_plot()
                 if importance_fig:
@@ -1153,17 +1153,17 @@ elif page == "📈 Modèles Prédictifs":
                 st.info("Importance des features non disponible pour ce modèle")
 
     except ImportError as e:
-        st.error(f"❌ Module predictive_engine non disponible: {e}")
+        st.error(f" Module predictive_engine non disponible: {e}")
 
 
 # ============================================================
-# 8️⃣ INSIGHTS AVANCÉS (VOTRE CODE)
+#  INSIGHTS AVANCÉS 
 # ============================================================
-elif page == "🔍 Insights Avancés":
-    st.header("🔍 Analyse du Risque Client - Insights Avancés")
+elif page == " Insights Avancés":
+    st.header(" Analyse du Risque Client - Insights Avancés")
 
     if not st.session_state.data_loaded:
-        st.warning("⚠️ Veuillez charger les données.")
+        st.warning(" Veuillez charger les données.")
         st.stop()
 
     # Utiliser df_final si disponible, sinon dataframe
@@ -1178,14 +1178,14 @@ elif page == "🔍 Insights Avancés":
 
     # Vérifier si l'analyse de risque a déjà été faite
     if st.session_state.scored_clients is None:
-        st.info("ℹ️ L'analyse de risque n'a pas encore été effectuée.")
+        st.info(" L'analyse de risque n'a pas encore été effectuée.")
 
         # Vérifier les colonnes nécessaires pour l'analyse
         required_cols = ['ncli', 'Prime', 'nb_jour_couv']
         missing_cols = [col for col in required_cols if col not in df_final.columns]
 
         if missing_cols:
-            st.warning(f"⚠️ Colonnes manquantes pour l'analyse risque: {', '.join(missing_cols)}")
+            st.warning(f" Colonnes manquantes pour l'analyse risque: {', '.join(missing_cols)}")
             st.info("""
             **Colonnes nécessaires:**
             - `ncli` : Identifiant client
@@ -1198,7 +1198,7 @@ elif page == "🔍 Insights Avancés":
             """)
             st.stop()
 
-        if st.button("🚀 Effectuer l'analyse de risque maintenant", type="primary"):
+        if st.button(" Effectuer l'analyse de risque maintenant", type="primary"):
             try:
                 from insight_engine import InsightEngine
 
@@ -1218,11 +1218,11 @@ elif page == "🔍 Insights Avancés":
                     st.session_state.raw_data = df_final
                     st.session_state.insight_engine = insight_engine
 
-                    st.success("✅ Analyse de risque terminée! Actualisez la page.")
+                    st.success("  Analyse de risque terminée! Actualisez la page.")
                     st.rerun()
 
             except ImportError as e:
-                st.error(f"❌ Module insight_engine non disponible: {e}")
+                st.error(f" Module insight_engine non disponible: {e}")
                 st.stop()
 
     # Récupérer les données analysées
@@ -1236,15 +1236,15 @@ elif page == "🔍 Insights Avancés":
     analysis_type = st.radio(
         "Type d'analyse :",
         [
-            "📋 Vue d'ensemble",
-            "📊 Analyse Univariée",
-            "📈 Analyse Bivariée",
-            "📄 Rapport Narratif"
+            " Vue d'ensemble",
+            " Analyse Univariée",
+            " Analyse Bivariée",
+            " Rapport Narratif"
         ],
         horizontal=True
     )
 
-    if analysis_type == "📋 Vue d'ensemble":
+    if analysis_type == " Vue d'ensemble":
         st.subheader("Vue d'ensemble du portefeuille")
 
         col1, col2, col3, col4 = st.columns(4)
@@ -1263,7 +1263,7 @@ elif page == "🔍 Insights Avancés":
         for ins in insights:
             st.markdown(f"• {ins}")
 
-        st.subheader("📊 Distribution des risques")
+        st.subheader(" Distribution des risques")
         risk_dist = scored_clients["niveau_risque"].value_counts()
         fig_pie = go.Figure(data=[go.Pie(
             labels=risk_dist.index,
@@ -1274,7 +1274,7 @@ elif page == "🔍 Insights Avancés":
         fig_pie.update_layout(title="Répartition par niveau de risque")
         st.plotly_chart(fig_pie, use_container_width=True)
 
-    elif analysis_type == "📊 Analyse Univariée":
+    elif analysis_type == " Analyse Univariée":
         st.subheader("Analyse Univariée")
 
         numeric_cols = scored_clients.select_dtypes(include=[np.number]).columns.tolist()
@@ -1338,7 +1338,7 @@ elif page == "🔍 Insights Avancés":
             )
             st.plotly_chart(fig_bar, use_container_width=True)
 
-    elif analysis_type == "📈 Analyse Bivariée":
+    elif analysis_type == " Analyse Bivariée":
         st.subheader("Analyse Bivariée")
 
         numeric_cols = scored_clients.select_dtypes(include=[np.number]).columns.tolist()
@@ -1378,7 +1378,7 @@ elif page == "🔍 Insights Avancés":
 
             try:
                 correlation = scored_clients[[x_var, y_var]].corr().iloc[0, 1]
-                st.info(f"📊 Coefficient de corrélation : {correlation:.3f}")
+                st.info(f" Coefficient de corrélation : {correlation:.3f}")
             except:
                 pass
 
@@ -1400,16 +1400,16 @@ elif page == "🔍 Insights Avancés":
                 st.plotly_chart(fig, use_container_width=True)
 
     else:  # Rapport Narratif
-        st.subheader("📄 Rapport narratif pour décideur")
+        st.subheader(" Rapport narratif pour décideur")
         report = insight_engine.generate_narrative_report(scored_clients)
         st.markdown(report)
 
-        st.subheader("📤 Export du rapport")
+        st.subheader(" Export du rapport")
         col1, col2 = st.columns(2)
 
         with col1:
             # Export PDF (simulé)
-            if st.button("🖨️ Générer PDF"):
+            if st.button(" Générer PDF"):
                 st.success("Rapport PDF généré (simulation)")
                 st.info("Fonctionnalité PDF à implémenter avec reportlab ou weasyprint")
 
@@ -1417,7 +1417,7 @@ elif page == "🔍 Insights Avancés":
             # Export texte
             txt_report = insight_engine.generate_narrative_report(scored_clients)
             st.download_button(
-                label="📥 Télécharger rapport (TXT)",
+                label=" Télécharger rapport (TXT)",
                 data=txt_report,
                 file_name="rapport_risque_clients.txt",
                 mime="text/plain"
@@ -1425,12 +1425,12 @@ elif page == "🔍 Insights Avancés":
 # ============================================================
 # RAPPORT
 # ============================================================
-elif page == "📝 Rapport":
-    st.header("📝 Génération de rapport IA")
+elif page == " Rapport":
+    st.header(" Génération de rapport IA")
 
     # Vérifier si report_engine est disponible
     if not REPORT_ENGINE_AVAILABLE:
-        st.error("❌ Le module report_engine n'est pas disponible. Installez les dépendances nécessaires.")
+        st.error(" Le module report_engine n'est pas disponible. Installez les dépendances nécessaires.")
         st.info("""
         **Dépendances nécessaires :**
         ```bash
@@ -1444,19 +1444,19 @@ elif page == "📝 Rapport":
         try:
             st.session_state.report_engine = ReportEngine(ai_client=None)
         except Exception as e:
-            st.error(f"❌ Impossible d'initialiser le moteur de rapport: {e}")
+            st.error(f" Impossible d'initialiser le moteur de rapport: {e}")
             st.stop()
 
     # Indicateur du moteur utilisé
     if hasattr(st.session_state, 'using_mateur') and st.session_state.using_mateur:
-        st.info("🔒 **Moteur : Mateur AI** - Analyse 100% locale, aucune donnée externe")
+        st.info(" **Moteur : Mateur AI** - Analyse 100% locale, aucune donnée externe")
     elif st.session_state.openai_client is not None:
-        st.info("☁️ **Moteur : OpenAI** - Utilise l'API cloud OpenAI")
+        st.info(" **Moteur : OpenAI** - Utilise l'API cloud OpenAI")
     else:
-        st.info("⚡ **Moteur : Local** - Génération basique")
+        st.info(" **Moteur : Local** - Génération basique")
 
     if not st.session_state.data_ready:
-        st.warning("⚠️ Veuillez charger les données")
+        st.warning(" Veuillez charger les données")
         st.stop()
 
     title = st.text_input(
@@ -1493,7 +1493,7 @@ elif page == "📝 Rapport":
     )
 
     # Options d'export
-    st.subheader("📤 Options d'export")
+    st.subheader(" Options d'export")
     col_export1, col_export2, col_export3, col_export4 = st.columns(4)
     with col_export1:
         export_md = st.checkbox("Markdown (.md)", value=True)
@@ -1504,7 +1504,7 @@ elif page == "📝 Rapport":
     with col_export4:
         export_html = st.checkbox("HTML (.html)", value=True)
 
-    if st.button("🤖 Générer le rapport complet", type="primary"):
+    if st.button(" Générer le rapport complet", type="primary"):
         with st.spinner("Génération du rapport en cours..."):
             try:
                 # Préparation des données
@@ -1555,7 +1555,7 @@ elif page == "📝 Rapport":
                 )
 
                 st.session_state.generated_report_md = report_md
-                st.success("✅ Rapport markdown généré avec succès!")
+                st.success("  Rapport markdown généré avec succès!")
 
                 # Génération des exports
                 if export_pdf:
@@ -1563,9 +1563,9 @@ elif page == "📝 Rapport":
                         try:
                             pdf_buffer = st.session_state.report_engine.to_pdf(report_md, title)
                             st.session_state.generated_report_pdf = pdf_buffer.getvalue()
-                            st.success("✅ PDF généré avec succès!")
+                            st.success("  PDF généré avec succès!")
                         except Exception as e:
-                            st.warning(f"⚠️ PDF non généré: {str(e)}")
+                            st.warning(f" PDF non généré: {str(e)}")
                             st.session_state.generated_report_pdf = None
 
                 if export_word:
@@ -1573,9 +1573,9 @@ elif page == "📝 Rapport":
                         try:
                             word_buffer = st.session_state.report_engine.to_word(report_md, title)
                             st.session_state.generated_report_word = word_buffer.getvalue()
-                            st.success("✅ Document Word généré avec succès!")
+                            st.success("  Document Word généré avec succès!")
                         except Exception as e:
-                            st.warning(f"⚠️ Word non généré: {str(e)}")
+                            st.warning(f" Word non généré: {str(e)}")
                             st.session_state.generated_report_word = None
 
                 # Génération HTML
@@ -1583,13 +1583,13 @@ elif page == "📝 Rapport":
                     try:
                         html_report = st.session_state.report_engine.to_html(report_md)
                         st.session_state.generated_report_html = html_report
-                        st.success("✅ HTML généré avec succès!")
+                        st.success("  HTML généré avec succès!")
                     except Exception as e:
-                        st.warning(f"⚠️ HTML non généré: {str(e)}")
+                        st.warning(f" HTML non généré: {str(e)}")
                         st.session_state.generated_report_html = None
 
             except Exception as e:
-                st.error(f"❌ Erreur lors de la génération du rapport: {str(e)}")
+                st.error(f" Erreur lors de la génération du rapport: {str(e)}")
                 import traceback
 
                 st.code(traceback.format_exc())
@@ -1597,12 +1597,12 @@ elif page == "📝 Rapport":
     # Affichage et téléchargements
     if hasattr(st.session_state, 'generated_report_md') and st.session_state.generated_report_md:
         st.markdown("---")
-        st.subheader("📄 Aperçu du rapport")
+        st.subheader(" Aperçu du rapport")
 
-        with st.expander("📋 Voir le rapport complet", expanded=False):
+        with st.expander(" Voir le rapport complet", expanded=False):
             st.markdown(st.session_state.generated_report_md)
 
-        st.subheader("📥 Téléchargements")
+        st.subheader(" Téléchargements")
 
         # Création des boutons de téléchargement
         cols = st.columns(4)
@@ -1611,7 +1611,7 @@ elif page == "📝 Rapport":
         with cols[0]:
             filename = f"rapport_{datetime.now().strftime('%Y%m%d_%H%M')}"
             st.download_button(
-                label="📄 Markdown",
+                label=" Markdown",
                 data=st.session_state.generated_report_md,
                 file_name=f"{filename}.md",
                 mime="text/markdown",
@@ -1622,7 +1622,7 @@ elif page == "📝 Rapport":
         if hasattr(st.session_state, 'generated_report_pdf') and st.session_state.generated_report_pdf:
             with cols[1]:
                 st.download_button(
-                    label="📊 PDF",
+                    label=" PDF",
                     data=st.session_state.generated_report_pdf,
                     file_name=f"{filename}.pdf",
                     mime="application/pdf",
@@ -1633,7 +1633,7 @@ elif page == "📝 Rapport":
         if hasattr(st.session_state, 'generated_report_word') and st.session_state.generated_report_word:
             with cols[2]:
                 st.download_button(
-                    label="📝 Word",
+                    label=" Word",
                     data=st.session_state.generated_report_word,
                     file_name=f"{filename}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -1644,7 +1644,7 @@ elif page == "📝 Rapport":
         if hasattr(st.session_state, 'generated_report_html') and st.session_state.generated_report_html:
             with cols[3]:
                 st.download_button(
-                    label="🌐 HTML",
+                    label=" HTML",
                     data=st.session_state.generated_report_html,
                     file_name=f"{filename}.html",
                     mime="text/html",
@@ -1669,9 +1669,10 @@ st.markdown("---")
 st.markdown(
     """
     <div style='text-align: center; color: #666; font-size: 0.9rem; padding: 1rem;'>
-    <p><b>🔒 LIK Insurance Analyst Sécurisé</b> | Architecture Zéro Partage de Données</p>
+    <p><b> LIK Insurance Analyst Sécurisé</b> | Architecture Zéro Partage de Données</p>
     <p>Vos données restent 100% locales • Conforme RGPD • Année 2026-2027</p>
     </div>
     """,
     unsafe_allow_html=True
+
 )
